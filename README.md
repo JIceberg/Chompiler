@@ -2,4 +2,4 @@
 
 _Made by Jackson Isenberg_
 
-A custom compiler for C in Rust.
+A custom compiler for C in Rust
