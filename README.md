@@ -1,6 +1,6 @@
 # Chompiler&emsp;![Rust](https://github.com/JIceberg/Chompiler/workflows/Rust/badge.svg)
 
-<img src=".github/logo.png" width="100px">
+<img src=".github/logo.jpg" width="100px">
 
 _Made by Jackson Isenberg_
 
