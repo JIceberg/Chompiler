@@ -42,11 +42,15 @@ impl<'a> TokenParser<'a> {
 }
 
 // here we create an enum for our keywords in C
-// TODO: add more keywords
+// TODO: add unsigned vs signed
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Keyword {
     Int,
     Char,
+    Float,
+    Double,
+    Short,
+    Long,
     Return,
     If,
     Else,
@@ -58,43 +62,62 @@ pub enum Keyword {
 // TODO: add more data types
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Value {
-    Int(u32),
+    Int(i32),
     Char(u8),
+    Float(f32),
+    Double(f64),
+    Short(i16),
+    Long(i64),
 }
 
 // list of tokens
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Token {
+    // punctuation
     OpenBrace,
     CloseBrace,
     OpenParen,
     CloseParen,
     SemiColon,
+    Comma,
+    Colon,
+    Question,
+
+    // numbers and words we type into the environment/editor
     Keyword(Keyword),
     Identifier(String),
     Literal(Value),
+
+    // bitwise
     BitComp,
+    BitwiseLeft,
+    BitwiseRight,
+    BitwiseAnd,
+    BitwiseXor,
+    BitwiseOr,
+
+    // logical
     LogicalNeg,
+    And,
+    Or,
+
+    // arithmetic
     Negation,
     Addition,
     Multiplication,
     Division,
     Modulus,
-    And,
-    Or,
+
+    // comparison
     Equal,
     NotEqual,
     LessThan,
     LessThanOrEqual,
     GreaterThan,
     GreaterThanOrEqual,
-    BitwiseLeft,
-    BitwiseRight,
-    BitwiseAnd,
-    BitwiseXor,
-    BitwiseOr,
+
+    // assignment
     Assign,
-    Comma,
     AssignAdd,
     AssignSub,
     AssignDiv,
@@ -105,8 +128,8 @@ pub enum Token {
     AssignAnd,
     AssignOr,
     AssignXor,
+
+    // increment/decrement unary ops
     Increment,
     Decrement,
-    Colon,
-    Question,
 }
