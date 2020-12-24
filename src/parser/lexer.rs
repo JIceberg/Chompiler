@@ -1,4 +1,4 @@
-use super::token::*;
+use super::tokens::*;
 
 pub fn lex(contents: &str) -> Vec<Token> {
     let mut tokens = TokenParser::new(contents);
@@ -11,15 +11,11 @@ pub fn lex(contents: &str) -> Vec<Token> {
             ')' => tokens.push(Token::CloseParen),
             ';' => tokens.push(Token::SemiColon),
             ' ' | '\t' | '\n' | '\r' => tokens.drop(),
-            'a'...'z' | 'A'...'Z' => {
+            'a'..='z' | 'A'..='Z' => {
                 let word: &str = &tokens.get_string(|x| x.is_ascii() && x.is_alphanumeric());
                 match word {
                     "int" =>  tokens.push_back(Token::Keyword(Keyword::Int)),
                     "char" =>  tokens.push_back(Token::Keyword(Keyword::Char)),
-                    "long" => tokens.push_back(Token::Keyword(Keyword::Long)),
-                    "short" => tokens.push_back(Token::Keyword(Keyword::Short)),
-                    "float" => tokens.push_back(Token::Keyword(Keyword::Float)),
-                    "double" => tokens.push_back(Token::Keyword(Keyword::Double)),
                     "return" => tokens.push_back(Token::Keyword(Keyword::Return)),
                     "if" => tokens.push_back(Token::Keyword(Keyword::If)),
                     "else" => tokens.push_back(Token::Keyword(Keyword::Else)),
@@ -27,7 +23,7 @@ pub fn lex(contents: &str) -> Vec<Token> {
                     _ => tokens.push_back(Token::Identifier(word.to_string()))
                 }
             },
-            '0'...'9' => {
+            '0'..='9' => {
                 let word = tokens.get_string(|x| x.is_ascii() && (x.is_digit(16) || x == &'x'));
                 let int: u32 = if word.starts_with("0x") {
                     u32::from_str_radix(&word[2..], 16).expect("Not a number")

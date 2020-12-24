@@ -42,15 +42,10 @@ impl<'a> TokenParser<'a> {
 }
 
 // here we create an enum for our keywords in C
-// TODO: add unsigned vs signed
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Keyword {
     Int,
     Char,
-    Float,
-    Double,
-    Short,
-    Long,
     Return,
     If,
     Else,
@@ -59,15 +54,10 @@ pub enum Keyword {
 
 // here we create values for our data types
 // ints are 32 bits and chars are a byte
-// TODO: add more data types
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum Value {
-    Int(i32),
+    Int(u32),
     Char(u8),
-    Float(f32),
-    Double(f64),
-    Short(i16),
-    Long(i64),
 }
 
 // list of tokens
